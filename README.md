@@ -10,9 +10,13 @@
 
    2.2 [Data cleaning](#data-cleaning)
 
-3. [Visualizations and Insights](#visualization-and-insights)
+   2.3 [Descriptive statistics](#descriptive-statistics)
+
+   2.4 [Visualization with Seaborn](#visualization-with-seaborn)
    
-4. [Recommendations](#recommendations)
+4. [Insights](#insights)
+   
+5. [Recommendations](#recommendations)
 
 ## 1. Introduction
 
@@ -89,8 +93,10 @@ df.info()
 
 The dataset now has 397924 rows and 7 columns. It is free from missing values.
 
+<br>
+
 #### Duplicates
-Normally, customers buy more than one type of products in a transaction. Thus, I assume that the combination of invoice number ("InvoiceNo") and product code ("StockCode") is the primary key. 
+Normally, customers buy more than one type of products in a transaction. Thus, I assume that the combination of invoice number ("InvoiceNo") and product code ("StockCode") is the primary key. In this context, duplicates are defined as rows with the same combination of 'InvoiceNo' and 'StockCode'.
 
 ```python
 # Remove duplicates with the same combination of 'InvoiceNo' and 'StockCode'
@@ -105,7 +111,10 @@ df_no_duplicates.info()
 
 The dataset now contains 387875 rows and 7 columns. It is free from duplicates.
 
-<h2 style="color: #FF5733;">This is an Orange Header</h2>
-## 3. Visualization and Insights
+### 2.3 Descriptive statistics
+
+### 2.4 Visualization with Seaborn
+
+## 3. Insights
 ## 4. Recommendations
 
