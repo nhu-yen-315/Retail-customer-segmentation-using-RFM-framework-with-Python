@@ -145,13 +145,13 @@ df_rfm.head()
 ```
 The RFM looks like this:
 
-<img src="https://github.com/user-attachments/assets/dda971f9-3c3b-41c7-8dd9-253c5ede3719" width=400>
+<img src="https://github.com/user-attachments/assets/dda971f9-3c3b-41c7-8dd9-253c5ede3719" width=300>
 
 Info() of RFM dataframe:
 ```python
 df_rfm.info()
 ```
-<img src="https://github.com/user-attachments/assets/09efc650-5307-4a7d-9936-f081d56e72b5" width=400>
+<img src="https://github.com/user-attachments/assets/09efc650-5307-4a7d-9936-f081d56e72b5" width=300>
 
 The output shows that SuperStore has 4339 existing customers in the period of 1/12/2010 and 9/12/2011. All columns are free from missing values. 
 
