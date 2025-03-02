@@ -1,7 +1,7 @@
 # RFM-Marketing-Analysis-with-Python 
 
 
-## Table of Contents
+## Table of Contents 📋
 1. [Introduction](#introduction)
    
 2. [Exploratory data analysis (EDA)](#exploratory-data-analysis)
