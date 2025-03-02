@@ -42,7 +42,70 @@ There are 541 909 data points in the dataset. It contains 8 variables:
 
 ### 2.2 Data cleaning
 
+#### Missing values and Data type
+info() of the data is useful in checking missing values and data type for each column.
 
+```python
+# Load the Excel file
+df_original = pd.read_excel('/Users/nhuyenhuynh/Downloads/Final_project_RFM/ecommerce retail.xlsx', sheet_name='ecommerce retail')
+      
+df_original.info()
+```
+
+<img src="https://github.com/user-attachments/assets/41ced5d2-ae8d-4055-aba3-1e63e3732673" width="400"/>
+
+- The dataset contains 541909 rows and 8 columns. 
+- "Description" and "CustomerID" columns have 1454 and 135080 missing values respectively.
+- The data type of all variables are well defined.
+
+<br> 
+<br>
+
+Now, it is important to deal with missing values. In the context of RFM analysis, information about what kind of products customers buy is not important. Hence, I will remove "Description" column from the dataset. A transaction without customer id is useless in the RFM analysis; thus, I drop all rows without customer id. 
+
+Besides, only successful purchase should be counted. Hence, I will drop all cancelled orders which have the "InvoiceNo" starting with the letter "C". The code is as follow:
+
+```python
+# Drop the "Description" column
+df = df.drop('Description', axis='columns')
+
+# Drop all rows without customer id
+df = df[~df['CustomerID'].isnull()]
+
+# Drop all cancelled orders
+df = df[~df['InvoiceNo'].str.contains('c', case=False, na=False)]
+```
+
+<br>
+<br>
+
+After dealing with missing values and removing all cancellation, I use info() to see the changes in the dataset:
+
+```python
+df.info()
+```
+
+<img src="https://github.com/user-attachments/assets/312f41e3-e444-46fe-9265-d36b9125a895" width="400"/>
+
+The dataset now has 397924 rows and 7 columns. It is free from missing values.
+
+#### Duplicates
+Normally, customers buy more than one type of products in a transaction. Thus, I assume that the combination of invoice number ("InvoiceNo") and product code ("StockCode") is the primary key. 
+
+```python
+# Remove duplicates with the same combination of 'InvoiceNo' and 'StockCode'
+df_no_duplicates = df.drop_duplicates(subset=['InvoiceNo', 'StockCode'])
+
+# See the changes after removing duplicates
+df_no_duplicates.info()
+
+```
+
+<img src="https://github.com/user-attachments/assets/cdcf7ca6-9db5-48be-8baf-ac66aed45e09" width="400">
+
+The dataset now contains 387875 rows and 7 columns. It is free from duplicates.
+
+<h2 style="color: #FF5733;">This is an Orange Header</h2>
 ## 3. Visualization and Insights
 ## 4. Recommendations
 
