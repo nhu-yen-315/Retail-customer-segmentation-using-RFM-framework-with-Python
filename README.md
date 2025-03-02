@@ -10,13 +10,12 @@
 
    2.2 [Data cleaning](#data-cleaning)
 
-   2.3 [Descriptive statistics](#descriptive-statistics)
+   2.3 [Customer segmentation using Recency-Frequency-Money framework](#receny-frequency-money)
 
-   2.4 [Visualization with Seaborn](#visualization-with-seaborn)
    
-4. [Insights](#insights)
+3. [Visualizations and Insights](#visualizations-and-insights)
    
-5. [Recommendations](#recommendations)
+4. [Recommendations](#recommendations)
 
 ## 1. Introduction
 
@@ -111,10 +110,54 @@ df_no_duplicates.info()
 
 The dataset now contains 387875 rows and 7 columns. It is free from duplicates.
 
-### 2.3 Descriptive statistics
+### 2.3 Customer segmentation using Recency-Frequency-Money framework
 
-### 2.4 Visualization with Seaborn
+#### Generate RFM data for each customer
 
-## 3. Insights
+First, it is important to define RFM framework:
+- Recency (R) measures the time since the last purchase or interaction. A smaller value indicates higher engagement while a higher value indicates lower engagement from the customer.
+- Frequency (F) measures how often a customer makes a purchase or interacts with a business within a specific period.
+- Monetary (M) measures how much money a customer spends during a specific period. A higher monetary value indicates the customer has spent more and more engaged with the company and vice versa.
+
+The desired output is a dataframe with 4 columns: CustomerID, Recency, Frequency, Monetary. The code is as follow:
+
+```python
+# create the dataframe called df_rfm with the first column of MaxDate
+df_rfm = df.groupby('CustomerID')['InvoiceDate'].max().to_frame()
+
+# Create a new column containing the number of transactions each customer made
+df_rfm['Frequency'] = df.groupby('CustomerID')['InvoiceNo'].nunique()
+
+# Create the Recency column
+specific_date = pd.to_datetime('2011-12-31')
+df_rfm['Recency'] = (specific_date - df_rfm['InvoiceDate']).dt.days
+
+# Create Value column
+df['Price'] = df['UnitPrice']*df['Quantity']
+df_rfm['Monetary'] = df.groupby('CustomerID')['Price'].sum()
+df_rfm = df_rfm.reset_index()
+
+# Finalize RFM dataframe
+df_rfm = df_rfm[['CustomerID', 'Frequency', 'Recency', 'Monetary']].copy()
+
+# Express 5 first values of RFM dataframe
+df_rfm.head()
+```
+The RFM looks like this:
+
+<img src="https://github.com/user-attachments/assets/dda971f9-3c3b-41c7-8dd9-253c5ede3719" width=400>
+
+Info() of RFM dataframe:
+```python
+df_rfm.info()
+```
+<img src="https://github.com/user-attachments/assets/09efc650-5307-4a7d-9936-f081d56e72b5" width=400>
+
+The output shows that SuperStore has 4339 existing customers in the period of 1/12/2010 and 9/12/2011. All columns are free from missing values. 
+
+
+
+
+## 3. Visualizations and Insights
 ## 4. Recommendations
 
