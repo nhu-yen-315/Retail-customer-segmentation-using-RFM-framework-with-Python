@@ -158,6 +158,30 @@ df_rfm.info()
 
 The output shows that SuperStore has 4339 existing customers in the period of 1/12/2010 and 9/12/2011. All columns are free from missing values. 
 
+#### Generate 1-5 rating 
+
+The scale of 1 to 5 can be used to segment RFM into 5 groups. Quintile statistical technique is used to divide the dataset into 5 equal parts. Before applying quintile, it is important to check for outliers. 
+
+- Recency:
+  ```python
+  sns.boxplot(data= df_rfm['Recency'])
+   plt.title('Many customers have not made any purchase this year.')
+   plt.savefig('boxplot.png', dpi=300)
+   plt.show()
+  ```
+<img src='https://github.com/user-attachments/assets/dbc13db3-0858-4601-9e0b-b109c1607f65' width=400>
+
+   The boxplot shows that many customers have not made any purchase in 2012. They can be considered as already lost customers. Thus, I will remove them from the analysis.
+
+- Frequency:
+  
+  <img src='https://github.com/user-attachments/assets/e4799685-de26-484d-a9e1-391c1e1994a3' width=400>
+
+  The boxplot shows that there is a wide range of transaction numbers from 1-200. That's a good sign; however, there are many upper outliers. I will remove these outliers.
+
+- Monetary: Similarly, "Monetary" variable also sees many outliers.
+  
+  <img src='https://github.com/user-attachments/assets/0d7620a7-9e95-4192-80a8-eac47d54e433' width=400>
 
 
 
