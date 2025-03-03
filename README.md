@@ -158,7 +158,9 @@ df_rfm.info()
 
 The output shows that SuperStore has 4339 existing customers in the period of 1/12/2010 and 9/12/2011. All columns are free from missing values. 
 
-#### Generate 1-5 rating 
+<br>
+
+#### Generate relative RFM from absolute RFM 
 
 The scale of 1 to 5 can be used to segment RFM into 5 groups. Quintile statistical technique is used to divide the dataset into 5 equal parts. Before applying quintile, it is important to check for outliers. 
 
@@ -209,7 +211,7 @@ Code to remove outliers:
    ```
    <img src='https://github.com/user-attachments/assets/99df3383-9b63-4f9b-8b53-99042a3a2c31' width=300>
    
-   After removing outliers, the existing customer base has 3912 people. 
+   After removing outliers, the existing customer base has 3912 people. <br>
 
    Code to generate relative RFM:
    ```python
@@ -223,6 +225,10 @@ Code to remove outliers:
    Output: 
 
    <img src='https://github.com/user-attachments/assets/ccf89dec-6cf5-4645-9c1d-b9b163b5f49b' width=500>
+
+<br>
+
+#### Customer segmentation
 
    Necessary data for segmenting customers is available. "Rate" variable will be used for segmentation. Customers can be divided into 11 groups including champions, loyal, potential       loyalist, new customers, promising, need attention, about to sleep, at risk, cannot lose them, hibernating customers, lost customers. Code is as below:
 
@@ -250,8 +256,10 @@ Output:
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/4b2b7f30-ca52-418c-8fde-5b9f13960f50" />
 
+
 <br>
-**In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.**
+
+In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.
    
 
 
