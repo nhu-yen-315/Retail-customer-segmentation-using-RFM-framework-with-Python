@@ -298,7 +298,7 @@ This part is to visualize data in different dimensions in order to extract insig
   <img src='https://github.com/user-attachments/assets/ace5f9ae-ec56-41b9-b194-62ec1bea0243' width=400>
 
 
-  Figure 5 illustrates that 'cannot lose them' group is really worth noting. They didn't make frequent purchases while the average spending was really high, around 2700.
+  Figure 3 illustrates that 'cannot lose them' group is really worth noting. They didn't make frequent purchases while the average spending was really high, around 2700.
 
 - Recency by segment:
   
