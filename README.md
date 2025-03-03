@@ -259,7 +259,7 @@ Output:
 
 <br>
 
-In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.
+**In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.**
    
 
 
