@@ -183,6 +183,48 @@ The scale of 1 to 5 can be used to segment RFM into 5 groups. Quintile statistic
   
   <img src='https://github.com/user-attachments/assets/0d7620a7-9e95-4192-80a8-eac47d54e433' width=400>
 
+Code to remove outliers:
+   ```python
+   # Remove customers who have not made any purchase in 2012
+   df_no_outliers = df_rfm[df_rfm['Recency'] > 365]
+
+
+   # Remove outliers based on "Frequency" criteria
+   Q1 = df_rfm['Frequency'].quantile(0.25)
+   Q3 = df_rfm['Frequency'].quantile(0.75)
+   IQR = Q3 - Q1
+   lower_bound = Q1 - 1.5 * IQR
+   upper_bound = Q3 + 1.5 * IQR
+   df_no_outliers = df_rfm[(df_rfm['Frequency'] >= lower_bound) & (df_rfm['Frequency'] <= upper_bound)]
+
+
+   # Remove outliers based on "Monetary" criteria
+   Q1 = df_rfm['Monetary'].quantile(0.25)
+   Q3 = df_rfm['Monetary'].quantile(0.75)
+   IQR = Q3 - Q1
+   upper_bound = Q3 + 1.5 * IQR
+   df_no_outliers = df_rfm[df_rfm['Monetary'] <= upper_bound]
+
+   df_no_outliers.info()
+   ```
+   <img src='https://github.com/user-attachments/assets/99df3383-9b63-4f9b-8b53-99042a3a2c31' width=300>
+   
+   After removing outliers, the existing customer base has 3912 people. 
+
+   Code to generate relative RFM:
+   ```python
+   df_no_outliers['FrequencyRate'] = pd.cut(df_no_outliers["Frequency"], 5, labels=['1','2','3','4','5'], duplicates='drop')
+   df_no_outliers['RecencyRate'] = pd.cut(df_no_outliers['Recency'], 5, labels=['5','4','3','2','1'], duplicates='drop')
+   df_no_outliers['MonetaryRate'] = pd.cut(df_no_outliers['Monetary'], 5, labels=['1','2','3','4','5'], duplicates='drop')
+   df_no_outliers['Rate'] = df_no_outliers['FrequencyRate'].str.cat(df_no_outliers['RecencyRate']).str.cat(df_no_outliers['MonetaryRate'])
+   df_rate = df_no_outliers.copy()
+   df_rate.head()
+   ```
+   Output: 
+
+   <img src='https://github.com/user-attachments/assets/ccf89dec-6cf5-4645-9c1d-b9b163b5f49b' width=500>
+
+   Necessary data for segmenting customers is available. "Rate" variable will be used for segmentation. 
 
 
 ## 3. Visualizations and Insights
