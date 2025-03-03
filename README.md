@@ -315,4 +315,13 @@ This part is to visualize data in different dimensions in order to extract insig
 
 
 ## 4. Recommendations
+In summary, SuperStore's existing customer base can be categorized into 6 groups: at risk, lost customers, cannot lose them, hibernating customers, potential loyalist, loyal:   
+- 60% of customers are in the 'lost' group. 
+- 36% are in 'at risk' and 'cannot lose them' segments. 
+- 'Loyal' and 'potential loyal' only occupy 0.2%.
 
+
+The first goal of marketing campaign is to appreciate customers who stay with SuperStore in 2012. Thus, the marketing team should ignore the 'lost' group since they have not made purchase this year. The appreciation program should be directed to 'loyal', 'potential loyal', 'at risk' and 'cannot lose them' segments. 
+
+
+The second goal is to convert potential customers in loyalists. To achieve that, the company should focus on keeping 'at risk' and 'cannot lose them' customers. The reason is that these two groups have good average spendings, while the last purchase was around 70 days from 31/12/2012. To convert them into 'loyal' group, the recency should be cut shorter to around 1 month. The suggested action is to encourage them make purchases again by offering good deals. Further analysis can be conducted to find out the most frequently bought products by these two groups. So SuperStore can tailor a more suitable sales program for Christmas and New Year holidays.
