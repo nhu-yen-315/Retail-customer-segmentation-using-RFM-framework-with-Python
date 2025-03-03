@@ -224,7 +224,35 @@ Code to remove outliers:
 
    <img src='https://github.com/user-attachments/assets/ccf89dec-6cf5-4645-9c1d-b9b163b5f49b' width=500>
 
-   Necessary data for segmenting customers is available. "Rate" variable will be used for segmentation. 
+   Necessary data for segmenting customers is available. "Rate" variable will be used for segmentation. Customers can be divided into 11 groups including champions, loyal, potential       loyalist, new customers, promising, need attention, about to sleep, at risk, cannot lose them, hibernating customers, lost customers. Code is as below:
+
+   ```python
+   conditions = [(df_rate['Rate'].isin(['555', '554', '544', '545', '454', '455', '445'])),
+             (df_rate['Rate'].isin(['543', '444', '435', '355', '354', '345', '344', '335'])),
+             (df_rate['Rate'].isin(['553', '551', '552', '541', '542', '533', '532', '531', '452', '451', '442', '441', '431', '453', '433', '432', '423', '353', '352', '351', '342', '341', '333', '323'])),
+             (df_rate['Rate'].isin(['512', '511', '422', '421', '412', '411', '311'])),
+              (df_rate['Rate'].isin(['525', '524', '523', '522', '521', '515', '514', '513', '425','424', '413','414','415', '315', '314', '313'])),
+              (df_rate['Rate'].isin(['535', '534', '443', '434', '343', '334', '325', '324'])),
+              (df_rate['Rate'].isin(['331', '321', '312', '221', '213', '231', '241', '251'])),
+              (df_rate['Rate'].isin(['255', '254', '245', '244', '253', '252', '243', '242', '235', '234', '225', '224', '153', '152', '145', '143', '142', '135', '134', '133', '125', '124'])),
+              (df_rate['Rate'].isin(['155', '154', '144', '214','215','115', '114', '113'])),
+              (df_rate['Rate'].isin(['332', '322', '233', '232', '223', '222', '132', '123', '122', '212', '211'])),
+              (df_rate['Rate'].isin(['111', '112', '121', '131','141','151']))
+        ]
+
+choices = ['Champions','Loyal','Potential Loyalist','New Customers','Promising','Need Attention',
+           'About To Sleep','At Risk','Cannot Lose Them', 'Hibernating customers','Lost customers']
+
+df_rate['Segment'] = np.select(conditions, choices)
+df_rate.head()
+   ```
+Output: 
+
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/4b2b7f30-ca52-418c-8fde-5b9f13960f50" />
+
+<br>
+**In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.**
+   
 
 
 ## 3. Visualizations and Insights
