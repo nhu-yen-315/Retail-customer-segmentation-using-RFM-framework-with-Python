@@ -264,5 +264,55 @@ Output:
 
 
 ## 3. Visualizations and Insights
+This part is to visualize data in different dimensions in order to extract insights.
+
+- Number of customers by segment:
+  ```python
+  # Visualize the number of customers by segment
+   sns.set_style('whitegrid')
+   visual1 = sns.countplot(data=df_rate, x='Segment')
+   visual1.set_xticklabels(visual1.get_xticklabels(), rotation=60)
+   visual1.bar_label(visual1.containers[0], fontsize=10, color='black')
+   visual1.set_title("Figure 1: The number of customers by segment")
+   plt.show()
+  ```
+   <img src='https://github.com/user-attachments/assets/0b1f4a86-442b-4906-b2b2-821079af41bc' width=400>
+   
+   Figure 1 shows that though there are 11 categories, SuperStore only has 6 customer groups: at risk, lost customers, cannot lose them, hibernating customers, potential loyalist, loyal.
+  - Nearly 60% customers are already lost. The company should not focus the marketing effort on this group.
+  - Around 30% customers are at risk. Their last purchase was a long time ago; however, they used to buy frequently from the company and their spendings were significant.
+  - Around 6% customers are can't lose. Their characteristics were somehow similar to that of 'at risk' customers.
+  - Hibernating group is relatively small. They made purchase not so long time before 31/12/2012. Their frequency and spending are at the average level.
+  - It is worthnoting that SuperStore has very few loyal and potential loyal customers. The company needs to figure out the reasons for this.
+
+- The average spending by segment:
+  
+  <img src='https://github.com/user-attachments/assets/abb27ceb-795a-4ed7-903e-1723bdd90579' width=400>
+  
+  - Loyal customers have the highest average spending.
+  - 'Cannot lost them' group ranks the second in term of spending. 
+  - 'Potential loyal' and 'at risk' groups also spend a good amount of money.
+
+- The average number of successful purchase by segment:
+  
+  <img src='https://github.com/user-attachments/assets/ace5f9ae-ec56-41b9-b194-62ec1bea0243' width=400>
+
+
+  Figure 5 illustrates that 'cannot lose them' group is really worth noting. They didn't make frequent purchases while the average spending was really high, around 2700.
+
+- Recency by segment:
+  
+  <img src='https://github.com/user-attachments/assets/1367b5f0-0305-4cd1-82fd-4dce3194f171' width=400>
+
+   - On average, 'loyal' and 'potential loyal' customers made the last transaction within the last 30 days.
+   - 'Cannot lose them' and 'at risk' customers made the last transaction within the last 2 months.
+
+- Monetary vs. Frequency by segment:
+  
+  <img src='https://github.com/user-attachments/assets/92009bfe-de41-4899-bbe2-3793f2acbda7' width=400>
+
+  Figure 5 confirms that 'at risk' and 'cannot lose them' are important to SuperStore. They are a big group of customers. 'Cannot lose them' segment spent much more on average compared to 'at risk' group with the same frequency. 
+
+
 ## 4. Recommendations
 
