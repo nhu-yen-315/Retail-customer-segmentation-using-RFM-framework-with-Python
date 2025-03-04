@@ -3,8 +3,8 @@
 
 (Source: Drapers)
 
-Author: Huỳnh Như Yến
-Date: 4/3/2024
+Author: Huỳnh Như Yến <br>
+Date: 4/3/2024 <br>
 Tool: Python [Library: Pandas, Seaborn]
 
 ## Table of Contents 📋
