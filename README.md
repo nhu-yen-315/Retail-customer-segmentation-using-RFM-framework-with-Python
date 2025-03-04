@@ -3,6 +3,9 @@
 
 (Source: Drapers)
 
+Author: Huỳnh Như Yến
+Date: 4/3/2024
+Tool: Python [Library: Pandas, Seaborn]
 
 ## Table of Contents 📋
 1. [Introduction](#introduction)
