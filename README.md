@@ -286,7 +286,7 @@ Output:
 ## 3. Visualizations and Insights
 This part is to visualize data in different dimensions in order to extract insights.
 
-❓❓❓** Number of customers by segment:**
+❓❓❓ **Number of customers by segment:**
   ```python
   # Visualize the number of customers by segment
    sns.set_style('whitegrid')
