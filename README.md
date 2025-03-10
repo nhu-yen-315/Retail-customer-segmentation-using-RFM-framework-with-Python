@@ -25,12 +25,21 @@ Tool: Python [Library: Pandas, Seaborn]
 
 ## 1. Introduction
 
-The global retail chain SuperStore needs to come up with a marketing strategy for Christmas and New Year holidays. This year, they aim to focus on serving existing customers rather than acquiring new ones. SuperStore has two goals through the marketing campaign. First, they want to deliver their appreciation towards current customers. Second, they want to convert a group of existing buyers into loyal ones.
+**Context:** 
+<br>
+The global retail chain SuperStore is preparing a marketing strategy for Christmas and New Year holidays. The marketing campaign has two main goals: <br>
+      
+            🎯 Show appreciation to customers making purchase this year 
+      
+            🎯 Convert more customers to loyalists 
 
-The first step in planning a marketing plan is understanding customer profiles. A data analyst will help marketers to segment existing customers. Marketers then can tailor marketing plan suitable for each customer group. Thus, SuperStore can effectively deliver its thanks to existing customers. Additionally, marketers can also identify the characteristics of customers who can be converted into loyalists to SuperStore. 
+To support the marketing team, data analyst team will analyse the **transaction database** to **segment customers using Recency - Frequency - Monetary framework**.
 
-Customer segmentation can be based on different criteria. Recency - Frequency - Monetary are three useful criteria for companies operating in the retail industry. Thus, SuperStore's analyst will employ this framework to categorize existing buyers.
+**👤 Who is this project for?**
 
+Marketers
+
+Data analysts
 
 ## 2. Exploratory data analysis
 ### 2.1 Data description
@@ -51,8 +60,7 @@ There are 541 909 data points in the dataset. It contains 8 variables:
 
 ### 2.2 Data cleaning
 
-#### Missing values and Data type
-info() of the data is useful in checking missing values and data type for each column.
+ 🔑 Function: info() to display missing values and data types.
 
 ```python
 # Load the Excel file
@@ -63,16 +71,22 @@ df_original.info()
 
 <img src="https://github.com/user-attachments/assets/41ced5d2-ae8d-4055-aba3-1e63e3732673" width="400"/>
 
-- The dataset contains 541909 rows and 8 columns. 
-- "Description" and "CustomerID" columns have 1454 and 135080 missing values respectively.
-- The data type of all variables are well defined.
 
-<br> 
-<br>
+✅ The dataset contains 541909 rows and 8 columns. 
 
-Now, it is important to deal with missing values. In the context of RFM analysis, information about what kind of products customers buy is not important. Hence, I will remove "Description" column from the dataset. A transaction without customer id is useless in the RFM analysis; thus, I drop all rows without customer id. 
+✅ "Description" and "CustomerID" columns have 1454 and 135080 missing values respectively.
 
-Besides, only successful purchase should be counted. Hence, I will drop all cancelled orders which have the "InvoiceNo" starting with the letter "C". The code is as follow:
+✅ The data type of all variables are well defined.
+
+--------------------------------------------------------------------
+
+#### ❓❓❓ Solution to missing values
+ 
+- In the context of RFM analysis, information about what kind of products customers buy is not important. Hence, I will **remove "Description" column** from the dataset. 
+
+- A transaction without customer id is useless in the RFM analysis; thus, I **drop all rows without customer id**. 
+
+- Besides, only successful purchase should be counted. Hence, I will **drop all cancelled orders** which have the "InvoiceNo" starting with the letter "C". The code is as follow:
 
 ```python
 # Drop the "Description" column
@@ -83,25 +97,23 @@ df = df[~df['CustomerID'].isnull()]
 
 # Drop all cancelled orders
 df = df[~df['InvoiceNo'].str.contains('c', case=False, na=False)]
-```
 
-<br>
-<br>
-
-After dealing with missing values and removing all cancellation, I use info() to see the changes in the dataset:
-
-```python
 df.info()
 ```
+<br>
 
 <img src="https://github.com/user-attachments/assets/312f41e3-e444-46fe-9265-d36b9125a895" width="400"/>
 
-The dataset now has 397924 rows and 7 columns. It is free from missing values.
+<br>
+✅ The dataset now has 397924 rows and 7 columns. It is free from missing values.
 
 <br>
 
-#### Duplicates
-Normally, customers buy more than one type of products in a transaction. Thus, I assume that the combination of invoice number ("InvoiceNo") and product code ("StockCode") is the primary key. In this context, duplicates are defined as rows with the same combination of 'InvoiceNo' and 'StockCode'.
+--------------------------------------------------------------------
+
+#### ❓❓❓ Solution to Duplicates
+
+Normally, customers buy more than one type of products in a transaction. Thus, I assume that the combination of invoice number ("InvoiceNo") and product code ("StockCode") is the primary key. In this context, **duplicates are defined as rows with the same combination of 'InvoiceNo' and 'StockCode'.**
 
 ```python
 # Remove duplicates with the same combination of 'InvoiceNo' and 'StockCode'
@@ -114,11 +126,13 @@ df_no_duplicates.info()
 
 <img src="https://github.com/user-attachments/assets/cdcf7ca6-9db5-48be-8baf-ac66aed45e09" width="400">
 
-The dataset now contains 387875 rows and 7 columns. It is free from duplicates.
+✅ The dataset now contains 387875 rows and 7 columns. It is free from duplicates.
 
 ### 2.3 Customer segmentation using Recency-Frequency-Money framework
 
-#### Generate RFM data for each customer
+⚒️ 3 steps: Generate absolute RFM -> Generate relative RFM -> Customer segmentation
+
+#### ❓❓❓ Step 1: Generate absolute RFM 
 
 First, it is important to define RFM framework:
 - Recency (R) measures the time since the last purchase or interaction. A smaller value indicates higher engagement while a higher value indicates lower engagement from the customer.
@@ -163,9 +177,10 @@ The output shows that SuperStore has 4339 existing customers in the period of 1/
 
 <br>
 
-#### Generate relative RFM from absolute RFM 
+--------------------------------------------------------------------
+#### ❓❓❓ Step 2: Generate relative RFM (1-5 scale)
 
-The scale of 1 to 5 can be used to segment RFM into 5 groups. Quintile statistical technique is used to divide the dataset into 5 equal parts. Before applying quintile, it is important to check for outliers. 
+The **scale of 1 to 5** can be used to segment RFM into 5 groups. Before applying quintile, it is important to **check for outliers**. 
 
 - Recency:
   ```python
@@ -176,13 +191,13 @@ The scale of 1 to 5 can be used to segment RFM into 5 groups. Quintile statistic
   ```
 <img src='https://github.com/user-attachments/assets/dbc13db3-0858-4601-9e0b-b109c1607f65' width=400>
 
-   The boxplot shows that many customers have not made any purchase in 2012. They can be considered as already lost customers. Thus, I will remove them from the analysis.
+✅ The boxplot shows that many customers have not made any purchase in 2012. They can be considered as already lost customers. Thus, I will remove them from the analysis.
 
 - Frequency:
   
   <img src='https://github.com/user-attachments/assets/e4799685-de26-484d-a9e1-391c1e1994a3' width=400>
 
-  The boxplot shows that there is a wide range of transaction numbers from 1-200. That's a good sign; however, there are many upper outliers. I will remove these outliers.
+✅ The boxplot shows that there is a wide range of transaction numbers from 1-200. That's a good sign; however, there are many upper outliers. I will remove these outliers.
 
 - Monetary: Similarly, "Monetary" variable also sees many outliers.
   
@@ -214,7 +229,8 @@ Code to remove outliers:
    ```
    <img src='https://github.com/user-attachments/assets/99df3383-9b63-4f9b-8b53-99042a3a2c31' width=300>
    
-   After removing outliers, the existing customer base has 3912 people. <br>
+   
+✅ After removing outliers, the existing customer base has 3912 people. <br>
 
    Code to generate relative RFM:
    ```python
@@ -229,11 +245,12 @@ Code to remove outliers:
 
    <img src='https://github.com/user-attachments/assets/ccf89dec-6cf5-4645-9c1d-b9b163b5f49b' width=500>
 
-<br>
 
-#### Customer segmentation
+--------------------------------------------------------------------
 
-   Necessary data for segmenting customers is available. "Rate" variable will be used for segmentation. Customers can be divided into 11 groups including champions, loyal, potential       loyalist, new customers, promising, need attention, about to sleep, at risk, cannot lose them, hibernating customers, lost customers. Code is as below:
+#### ❓❓❓ Step 3: Customer segmentation
+
+Use "Rate" variable for segmentation. Customers can be divided into 11 groups including champions, loyal, potential loyalist, new customers, promising, need attention, about to sleep, at risk, cannot lose them, hibernating customers, lost customers. 
 
    ```python
    conditions = [(df_rate['Rate'].isin(['555', '554', '544', '545', '454', '455', '445'])),
@@ -262,14 +279,14 @@ Output:
 
 <br>
 
-**In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.**
+✅ **In summary, I just derive a dataframe including important information about each customer. Next, I will visualize the dataset to extract insights.**
    
 
 
 ## 3. Visualizations and Insights
 This part is to visualize data in different dimensions in order to extract insights.
 
-- Number of customers by segment:
+❓❓❓** Number of customers by segment:**
   ```python
   # Visualize the number of customers by segment
    sns.set_style('whitegrid')
@@ -282,49 +299,68 @@ This part is to visualize data in different dimensions in order to extract insig
    <img src='https://github.com/user-attachments/assets/0b1f4a86-442b-4906-b2b2-821079af41bc' width=400>
    
    Figure 1 shows that though there are 11 categories, SuperStore only has 6 customer groups: at risk, lost customers, cannot lose them, hibernating customers, potential loyalist, loyal.
-  - Nearly 60% customers are already lost. The company should not focus the marketing effort on this group.
-  - Around 30% customers are at risk. Their last purchase was a long time ago; however, they used to buy frequently from the company and their spendings were significant.
-  - Around 6% customers are can't lose. Their characteristics were somehow similar to that of 'at risk' customers.
-  - Hibernating group is relatively small. They made purchase not so long time before 31/12/2012. Their frequency and spending are at the average level.
-  - It is worthnoting that SuperStore has very few loyal and potential loyal customers. The company needs to figure out the reasons for this.
+   
+  ✅ Nearly 60% customers are already lost. The company should not focus the marketing effort on this group.
+  
+  ✅ Around 30% customers are at risk. Their last purchase was a long time ago; however, they used to buy frequently from the company and their spendings were significant.
+  
+  ✅ Around 6% customers are can't lose. Their characteristics were somehow similar to that of 'at risk' customers.
+  
+  ✅ Hibernating group is relatively small. They made purchase not so long time before 31/12/2012. Their frequency and spending are at the average level.
+  
+  ✅ It is worthnoting that SuperStore has very few loyal and potential loyal customers. The company needs to figure out the reasons for this.
 
-- The average spending by segment:
+--------------------------------------------------------------------
+
+❓❓❓ **The average spending by segment:**
   
   <img src='https://github.com/user-attachments/assets/abb27ceb-795a-4ed7-903e-1723bdd90579' width=400>
   
-  - Loyal customers have the highest average spending.
-  - 'Cannot lost them' group ranks the second in term of spending. 
-  - 'Potential loyal' and 'at risk' groups also spend a good amount of money.
+  ✅ Loyal customers have the highest average spending.
+  
+  ✅ 'Cannot lost them' group ranks the second in term of spending. 
+  
+  ✅ 'Potential loyal' and 'at risk' groups also spend a good amount of money.
 
-- The average number of successful purchase by segment:
+--------------------------------------------------------------------
+
+❓❓❓ **The average number of successful purchase by segment:**
   
   <img src='https://github.com/user-attachments/assets/ace5f9ae-ec56-41b9-b194-62ec1bea0243' width=400>
 
 
-  Figure 3 illustrates that 'cannot lose them' group is really worth noting. They didn't make frequent purchases while the average spending was really high, around 2700.
+  ✅ Figure 3 illustrates that 'cannot lose them' group is really worth noting. They didn't make frequent purchases while the average spending was really high, around 2700.
 
-- Recency by segment:
+--------------------------------------------------------------------
+
+❓❓❓ **Recency by segment:**
   
   <img src='https://github.com/user-attachments/assets/1367b5f0-0305-4cd1-82fd-4dce3194f171' width=400>
 
-   - On average, 'loyal' and 'potential loyal' customers made the last transaction within the last 30 days.
-   - 'Cannot lose them' and 'at risk' customers made the last transaction within the last 2 months.
+   ✅ On average, 'loyal' and 'potential loyal' customers made the last transaction within the last 30 days.
+   
+   ✅ 'Cannot lose them' and 'at risk' customers made the last transaction within the last 2 months.
 
-- Monetary vs. Frequency by segment:
+--------------------------------------------------------------------
+
+❓❓❓ **Monetary vs. Frequency by segment:**
   
   <img src='https://github.com/user-attachments/assets/92009bfe-de41-4899-bbe2-3793f2acbda7' width=400>
 
-  Figure 5 confirms that 'at risk' and 'cannot lose them' are important to SuperStore. They are a big group of customers. 'Cannot lose them' segment spent much more on average compared to 'at risk' group with the same frequency. 
+   ✅ Figure 5 confirms that 'at risk' and 'cannot lose them' are important to SuperStore. They are a big group of customers. 'Cannot lose them' segment spent much more on average compared to 'at risk' group with the same frequency. 
 
 
 ## 4. Recommendations
-In summary, SuperStore's existing customer base can be categorized into 6 groups: at risk, lost customers, cannot lose them, hibernating customers, potential loyalist, loyal:   
-- 60% of customers are in the 'lost' group. 
-- 36% are in 'at risk' and 'cannot lose them' segments. 
-- 'Loyal' and 'potential loyal' only occupy 0.2%.
+
+The first goal of marketing campaign is to appreciate customers who stay with SuperStore in 2012. So:
+
+      📍 Ignore the 'lost' group since they have not made purchase this year. 
+
+      📍 The appreciation program should be directed to 'loyal', 'potential loyal', 'at risk' and 'cannot lose them' segments. 
 
 
-The first goal of marketing campaign is to appreciate customers who stay with SuperStore in 2012. Thus, the marketing team should ignore the 'lost' group since they have not made purchase this year. The appreciation program should be directed to 'loyal', 'potential loyal', 'at risk' and 'cannot lose them' segments. 
+The second goal is to convert potential customers in loyalists. So:
 
+      📍 Focus on keeping 'at risk' and 'cannot lose them' customers. The reason is that these two groups have good average spendings, while the last purchase was around 70 days from 31/12/2012.
 
-The second goal is to convert potential customers in loyalists. To achieve that, the company should focus on keeping 'at risk' and 'cannot lose them' customers. The reason is that these two groups have good average spendings, while the last purchase was around 70 days from 31/12/2012. To convert them into 'loyal' group, the recency should be cut shorter to around 1 month. The suggested action is to encourage them make purchases again by offering good deals. Further analysis can be conducted to find out the most frequently bought products by these two groups. So SuperStore can tailor a more suitable sales program for Christmas and New Year holidays.
+      📍 To convert them into 'loyal' group, the recency should be cut shorter to around 1 month. The suggested action is to encourage them make purchases again by offering good deals. Further analysis can be conducted to find out the most frequently bought products by these two groups. So SuperStore can tailor a more suitable sales program for Christmas and New Year holidays.
