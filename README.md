@@ -1,4 +1,4 @@
-# RFM-Marketing-Analysis-with-Python 
+# Retail customer segmentation using Recency-Frequency-Monetary framework with Python 
 <img src="https://github.com/user-attachments/assets/0c3ec864-b594-46e6-9739-f1d5d234298d" width=700>
 
 (Source: Drapers)
