@@ -354,13 +354,13 @@ This part is to visualize data in different dimensions in order to extract insig
 
 The first goal of marketing campaign is to appreciate customers who stay with SuperStore in 2012. So:
 
-      📍 Ignore the 'lost' group since they have not made purchase this year. 
+📍 Ignore the 'lost' group since they have not made purchase this year. 
 
-      📍 The appreciation program should be directed to 'loyal', 'potential loyal', 'at risk' and 'cannot lose them' segments. 
+📍 The appreciation program should be directed to 'loyal', 'potential loyal', 'at risk' and 'cannot lose them' segments. 
 
 
 The second goal is to convert potential customers in loyalists. So:
 
-      📍 Focus on keeping 'at risk' and 'cannot lose them' customers. The reason is that these two groups have good average spendings, while the last purchase was around 70 days from 31/12/2012.
+📍 Focus on keeping 'at risk' and 'cannot lose them' customers. The reason is that these two groups have good average spendings, while the last purchase was around 70 days from 31/12/2012.
 
-      📍 To convert them into 'loyal' group, the recency should be cut shorter to around 1 month. The suggested action is to encourage them make purchases again by offering good deals. Further analysis can be conducted to find out the most frequently bought products by these two groups. So SuperStore can tailor a more suitable sales program for Christmas and New Year holidays.
+📍 To convert them into 'loyal' group, the recency should be cut shorter to around 1 month. The suggested action is to encourage them make purchases again by offering good deals. Further analysis can be conducted to find out the most frequently bought products by these two groups. So SuperStore can tailor a more suitable sales program for Christmas and New Year holidays.
